@@ -3,21 +3,27 @@ package br.com.idp.JoaoFonseca.model;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class User {
+@Table
+public class Author {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String email;
 	private String password;
 	
-	public User () {
+	
+	public Author () {
 	}
 	
-	public User(String name, String email, String password) {
+	public Author(String name, String email, String password) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
@@ -64,7 +70,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Author other = (Author) obj;
 		return Objects.equals(id, other.id);
 	}
 	

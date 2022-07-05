@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,6 +15,7 @@ import javax.persistence.OneToMany;
 public class Topic {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String title;
 	private String description;
@@ -25,12 +28,14 @@ public class Topic {
 	@OneToMany(mappedBy = "topic")
 	private List<Reply> replies;
 	
-	private User author;
+	@ManyToOne
+	@JoinColumn(name="author_id")
+	private Author author;
 	
 	public Topic() {
 	}
 	
-	public Topic(Media media,String title, String description, String status, List<Reply> replies, User author) {
+	public Topic(Media media,String title, String description, String status, List<Reply> replies, Author author) {
 		this.media = media;
 		this.title = title;
 		this.description = description;
@@ -71,11 +76,11 @@ public class Topic {
 		this.replies = replies;
 	}
 
-	public User getAuthor() {
+	public Author getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(User author) {
+	public void setAuthor(Author author) {
 		this.author = author;
 	}
 

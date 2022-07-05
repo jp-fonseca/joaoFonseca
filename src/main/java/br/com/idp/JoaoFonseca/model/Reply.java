@@ -3,6 +3,8 @@ package br.com.idp.JoaoFonseca.model;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,18 +13,24 @@ import javax.persistence.ManyToOne;
 public class Reply {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String description;
-	private User author;
+	
+	@ManyToOne
+	@JoinColumn(name="author_id")
+	private Author author;
 	
 	@ManyToOne
 	@JoinColumn(name="topic_id")
 	private Topic topic;
 	
+
+	
 	public Reply() {
 	}
 	
-	public Reply(Topic topic,String description, User author) {
+	public Reply(Topic topic,String description, Author author) {
 		this.topic = topic;
 		this.description = description;
 		this.author = author;
@@ -36,11 +44,11 @@ public class Reply {
 		this.description = description;
 	}
 
-	public User getAuthor() {
+	public Author getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(User author) {
+	public void setAuthor(Author author) {
 		this.author = author;
 	}
 
