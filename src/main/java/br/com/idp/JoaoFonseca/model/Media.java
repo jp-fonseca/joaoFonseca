@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Media {
@@ -17,6 +18,7 @@ public class Media {
 	private String genre;
 	private LocalDate date;
 
+	@OneToMany(mappedBy = "media")
 	private List<Topic> topics;
 	
 	public Media() {

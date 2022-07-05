@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Reply {
@@ -13,10 +15,15 @@ public class Reply {
 	private String description;
 	private User author;
 	
+	@ManyToOne
+	@JoinColumn(name="topic_id")
+	private Topic topic;
+	
 	public Reply() {
 	}
 	
-	public Reply(String description, User author) {
+	public Reply(Topic topic,String description, User author) {
+		this.topic = topic;
 		this.description = description;
 		this.author = author;
 	}
@@ -39,6 +46,14 @@ public class Reply {
 
 	public Long getId() {
 		return id;
+	}
+
+	public Topic getTopic() {
+		return topic;
+	}
+
+	public void setTopic(Topic topic) {
+		this.topic = topic;
 	}
 
 	@Override

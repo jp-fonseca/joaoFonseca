@@ -5,6 +5,9 @@ import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Topic {
@@ -15,13 +18,20 @@ public class Topic {
 	private String description;
 	private String status;
 	
+	@ManyToOne
+	@JoinColumn(name="media_id")
+	private Media media;
+	
+	@OneToMany(mappedBy = "topic")
 	private List<Reply> replies;
+	
 	private User author;
 	
 	public Topic() {
 	}
 	
-	public Topic(String title, String description, String status, List<Reply> replies, User author) {
+	public Topic(Media media,String title, String description, String status, List<Reply> replies, User author) {
+		this.media = media;
 		this.title = title;
 		this.description = description;
 		this.status = status;
@@ -71,6 +81,14 @@ public class Topic {
 
 	public Long getId() {
 		return id;
+	}
+	
+	public Media getMedia() {
+		return media;
+	}
+
+	public void setMedia(Media media) {
+		this.media = media;
 	}
 
 	@Override
