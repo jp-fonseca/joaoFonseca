@@ -1,6 +1,7 @@
 package br.com.idp.JoaoFonseca.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -44,6 +45,11 @@ public class TopicService {
 		topicRepository.save(topic);
 		return topic;
 		
+	}
+
+	public Optional<Topic> detailOne(Long id) {
+		Optional<Topic> topic = topicRepository.findById(id);
+		return topic;
 	}
 
 }
