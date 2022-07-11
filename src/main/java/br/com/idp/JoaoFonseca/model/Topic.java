@@ -1,5 +1,6 @@
 package br.com.idp.JoaoFonseca.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,9 +15,9 @@ import javax.persistence.OneToMany;
 @Entity
 public class Topic {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String title;
 	private String description;
 	private String status;
@@ -26,7 +27,7 @@ public class Topic {
 	private Media media;
 	
 	@OneToMany(mappedBy = "topic")
-	private List<Reply> replies;
+	private List<Reply> replies = new ArrayList<>();
 	
 	@ManyToOne
 	@JoinColumn(name="author_id")

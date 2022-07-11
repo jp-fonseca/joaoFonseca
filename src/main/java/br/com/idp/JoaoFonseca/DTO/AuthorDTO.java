@@ -1,4 +1,4 @@
-package br.com.idp.JoaoFonseca.DTO;
+package br.com.idp.JoaoFonseca.dto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,22 +6,22 @@ import java.util.stream.Collectors;
 
 import br.com.idp.JoaoFonseca.model.Author;
 
-public class AuthorDTO {
+public class AuthorDto {
 
 	
 	private String name;
 	private String email;
 	
-	public AuthorDTO() {
+	public AuthorDto() {
 
 	}
 	
-	public AuthorDTO(String name, String email) {
+	public AuthorDto(String name, String email) {
 		this.name = name;
 		this.email = email;
 	}
 	
-	public AuthorDTO(Author author) {
+	public AuthorDto(Author author) {
 		this.name = author.getName();
 		this.email = author.getEmail();
 	}
@@ -42,14 +42,14 @@ public class AuthorDTO {
 		this.email = email;
 	}
 
-	public static List<AuthorDTO> convert(List<Author> author) {
-		return author.stream().map(AuthorDTO::new).collect(Collectors.toList());
+	public static List<AuthorDto> convert(List<Author> author) {
+		return author.stream().map(AuthorDto::new).collect(Collectors.toList());
 	}
 
-	public static List<AuthorDTO> convert(Author author) {
-		List<AuthorDTO> authorDTO = new ArrayList<>();
-		authorDTO.add(new AuthorDTO(author));
-		return authorDTO;
+	public static List<AuthorDto> convert(Author author) {
+		List<AuthorDto> authorDto = new ArrayList<>();
+		authorDto.add(new AuthorDto(author));
+		return authorDto;
 	}
 
 }

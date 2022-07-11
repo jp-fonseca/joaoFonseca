@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.idp.JoaoFonseca.DTO.AuthorDTO;
+import br.com.idp.JoaoFonseca.dto.AuthorDto;
 import br.com.idp.JoaoFonseca.service.AuthorService;
 
 @RestController
@@ -22,8 +22,10 @@ public class AuthorsController {
 	private AuthorService authorService;
 	
 	@GetMapping
-	public ResponseEntity<List<AuthorDTO>> list(@RequestParam(required = false) String name){
-		List<AuthorDTO> authorsList= authorService.listAuthors(name);
+	public ResponseEntity<List<AuthorDto>> list(@RequestParam(required = false) String name){
+		
+		List<AuthorDto> authorsList= authorService.listAuthors(name);
+		
 		if (authorsList.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Authors not found");
 		}else {
