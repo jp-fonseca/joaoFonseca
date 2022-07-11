@@ -8,9 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Topic {
@@ -19,24 +19,27 @@ public class Topic {
 	private Long id;
 	
 	private String title;
+	
 	private String description;
+	
 	private String status;
 	
 	@ManyToOne
-	@JoinColumn(name="media_id")
+	@NotNull
 	private Media media;
+	
+	@ManyToOne
+	@NotNull
+	private Author author;
 	
 	@OneToMany(mappedBy = "topic")
 	private List<Reply> replies = new ArrayList<>();
-	
-	@ManyToOne
-	@JoinColumn(name="author_id")
-	private Author author;
+
 	
 	public Topic() {
 	}
 	
-	public Topic(Media media,String title, String description, String status, List<Reply> replies, Author author) {
+	public Topic(Media media, String title, String description, String status, List<Reply> replies, Author author) {
 		this.media = media;
 		this.title = title;
 		this.description = description;

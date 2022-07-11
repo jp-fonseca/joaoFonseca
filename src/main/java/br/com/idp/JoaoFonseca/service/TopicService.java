@@ -33,14 +33,14 @@ public class TopicService {
 			List<Topic> topics = topicRepository.findAll();
 			return TopicDto.convert(topics);
 		}else {
-			Topic topic = topicRepository.findByMediaName(name);
+			List<Topic> topic = topicRepository.findByMediaName(name);
 			return TopicDto.convert(topic);
 		}
 	}
 
 	@Transactional
 	public Topic register(@Valid TopicForm form) {
-		Topic topic = form.convert(mediaRepository,authorRepository);
+		Topic topic = form.convert(mediaRepository, authorRepository);
 		topicRepository.save(topic);
 		return topic;
 		

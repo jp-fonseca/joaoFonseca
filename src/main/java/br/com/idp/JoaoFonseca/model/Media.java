@@ -1,37 +1,35 @@
 package br.com.idp.JoaoFonseca.model;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Media {
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String name;
+	
 	private Double score;
+	
 	private String genre;
+	
 	private LocalDate date;
-
-	@OneToMany(mappedBy = "media")
-	private List<Topic> topics;
 	
 	public Media() {
 	}
 	
-	public Media(String name, Double score, String genre, LocalDate date, List<Topic> topics) {
+	public Media(String name, Double score, String genre, LocalDate date) {
 		this.name = name;
 		this.score = score;
 		this.genre = genre;
 		this.date = date;
-		this.topics = topics;
 	}
 
 	public String getName() {
@@ -64,14 +62,6 @@ public class Media {
 
 	public void setDate(LocalDate date) {
 		this.date = date;
-	}
-
-	public List<Topic> getTopics() {
-		return topics;
-	}
-
-	public void setTopics(List<Topic> topics) {
-		this.topics = topics;
 	}
 
 	public Long getId() {
