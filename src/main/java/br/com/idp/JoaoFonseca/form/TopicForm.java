@@ -65,7 +65,6 @@ public class TopicForm {
 	
 	
 	public Topic convert(MediaRepository mediaRepository, AuthorRepository authorRepository) {
-		
 		Media media = mediaRepository.findByName(mediaName);
 		Long id = Long.parseLong(authorId);
 		Optional<Author> author = authorRepository.findById(id);

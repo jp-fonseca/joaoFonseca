@@ -20,9 +20,7 @@ public class MediaController {
 	
 	@GetMapping
 	public ResponseEntity<List<MediaDto>> listAll(){
-		
 		List<MediaDto> medias = mediaService.listAll();
-		
 		return ResponseEntity.ok(medias);
 	}
 	
