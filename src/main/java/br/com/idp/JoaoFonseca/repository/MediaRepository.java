@@ -9,6 +9,6 @@ import br.com.idp.JoaoFonseca.model.Media;
 
 public interface MediaRepository extends JpaRepository<Media,Long>{
 
-	Media findByName(@NotNull @NotEmpty String mediaName);
+	Media findByTitle(@NotNull @NotEmpty String mediaName);
 
 }

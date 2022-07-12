@@ -16,7 +16,7 @@ public class TopicDto {
 	public TopicDto (Topic topic) {
 	this.id = topic.getId();
 	this.title = topic.getTitle();
-	this.mediaName = topic.getMedia().getName();
+	this.mediaName = topic.getMedia().getTitle();
 	this.status = topic.getStatus();
 	}
 

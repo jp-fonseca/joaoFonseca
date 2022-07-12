@@ -11,7 +11,6 @@ import br.com.idp.JoaoFonseca.model.Media;
 import br.com.idp.JoaoFonseca.model.Reply;
 import br.com.idp.JoaoFonseca.model.Topic;
 import br.com.idp.JoaoFonseca.repository.AuthorRepository;
-import br.com.idp.JoaoFonseca.repository.MediaRepository;
 
 public class TopicForm {
 
@@ -64,8 +63,7 @@ public class TopicForm {
 	}
 	
 	
-	public Topic convert(MediaRepository mediaRepository, AuthorRepository authorRepository) {
-		Media media = mediaRepository.findByName(mediaName);
+	public Topic convert(Media media, AuthorRepository authorRepository) {
 		Long id = Long.parseLong(authorId);
 		Optional<Author> author = authorRepository.findById(id);
 		if(author.isPresent()) {

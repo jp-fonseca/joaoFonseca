@@ -1,36 +1,46 @@
 package br.com.idp.JoaoFonseca.dto;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.annotation.JsonAlias;
 
 import br.com.idp.JoaoFonseca.model.Media;
 
 
 public class MediaDto {
 
-	private String name;
-	private Double score;
+	@JsonAlias("Title")
+	private String title;
+	
+	private Double imdbRating;
+	
+	@JsonAlias("Genre")
 	private String genre;
-	private LocalDate date;
+	
+	@JsonAlias("Year")
+	private String year;
+	
+	public MediaDto() {
+	}
 	
 	public MediaDto(Media media) {
-		this.name = media.getName();
-		this.score = media.getScore();
+		this.title = media.getTitle();
+		this.imdbRating = media.getScore();
 		this.genre = media.getGenre();
-		this.date = media.getDate();
+		this.year = media.getReleaseYear().toString();
 	}
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String name) {
+		this.title = name;
 	}
-	public Double getScore() {
-		return score;
+	public Double getImdbRating() {
+		return imdbRating;
 	}
-	public void setScore(Double score) {
-		this.score = score;
+	public void setImdbRating(Double score) {
+		this.imdbRating = score;
 	}
 	public String getGenre() {
 		return genre;
@@ -38,17 +48,21 @@ public class MediaDto {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-	public LocalDate getDate() {
-		return date;
+	public String getYear() {
+		return year;
 	}
-	public void setDate(LocalDate date) {
-		this.date = date;
+	public void setYear(Integer date) {
+		this.year = String.valueOf(date);
 	}
+	
 	public static List<MediaDto> convert(List<Media> medias) {
 		return medias.stream().map(MediaDto::new).collect(Collectors.toList());
 	}
 	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "Title: " + title + "Score:" + imdbRating + "Genre: " + genre + "Date: " + year;
+	}
+
+
 }

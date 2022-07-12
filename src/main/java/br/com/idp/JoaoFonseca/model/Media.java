@@ -1,6 +1,5 @@
 package br.com.idp.JoaoFonseca.model;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -8,36 +7,34 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import br.com.idp.JoaoFonseca.dto.MediaDto;
+
 @Entity
 public class Media {
 
 	@Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	private String name;
-	
+	private String title;
 	private Double score;
-	
+	private Integer releaseYear;
 	private String genre;
-	
-	private LocalDate date;
 	
 	public Media() {
 	}
 	
-	public Media(String name, Double score, String genre, LocalDate date) {
-		this.name = name;
+	public Media(String title, Double score, String genre, Integer releaseYear) {
+		this.title = title;
 		this.score = score;
 		this.genre = genre;
-		this.date = date;
+		this.releaseYear = releaseYear;
 	}
 
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public Double getScore() {
@@ -56,12 +53,12 @@ public class Media {
 		this.genre = genre;
 	}
 
-	public LocalDate getDate() {
-		return date;
+	public Integer getReleaseYear() {
+		return releaseYear;
 	}
 
-	public void setDate(LocalDate date) {
-		this.date = date;
+	public void setReleaseYear(Integer releaseYear) {
+		this.releaseYear = releaseYear;
 	}
 
 	public Long getId() {
@@ -85,5 +82,12 @@ public class Media {
 		return Objects.equals(id, other.id);
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Title: " + title + " Year: " + releaseYear + " Genre: " + genre + " Score: " + score;
+	}
+
+	public static Media convertOneMedia(MediaDto newDtoMedia) {
+		return null;
+	}
 }

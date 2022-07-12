@@ -8,6 +8,6 @@ import br.com.idp.JoaoFonseca.model.Topic;
 
 public interface TopicRepository extends JpaRepository<Topic,Long>{
 
-	List<Topic> findByMediaName(String title);
+	List<Topic> findByMediaTitle(String title);
 
 }

@@ -23,7 +23,7 @@ public class DetailedTopicDto {
 	this.title = topic.getTitle();
 	this.description = topic.getDescription();
 	this.status = topic.getStatus();
-	this.mediaName = topic.getMedia().getName();
+	this.mediaName = topic.getMedia().getTitle();
 	this.authorName = topic.getAuthor().getName();
 	
 	this.replies = new ArrayList<>();
