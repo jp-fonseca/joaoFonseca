@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 import br.com.idp.JoaoFonseca.dto.MediaDto;
 
@@ -14,15 +15,18 @@ public class Media {
 
 	@Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotNull
 	private String title;
+	
 	private Double score;
-	private Integer releaseYear;
+	private String releaseYear;
 	private String genre;
 	
 	public Media() {
 	}
 	
-	public Media(String title, Double score, String genre, Integer releaseYear) {
+	public Media(String title, Double score, String genre, String releaseYear) {
 		this.title = title;
 		this.score = score;
 		this.genre = genre;
@@ -53,11 +57,11 @@ public class Media {
 		this.genre = genre;
 	}
 
-	public Integer getReleaseYear() {
+	public String getReleaseYear() {
 		return releaseYear;
 	}
 
-	public void setReleaseYear(Integer releaseYear) {
+	public void setReleaseYear(String releaseYear) {
 		this.releaseYear = releaseYear;
 	}
 

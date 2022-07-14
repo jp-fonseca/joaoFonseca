@@ -34,7 +34,7 @@ public class MediaService {
 	
 	@Transactional
 	public Media register(MediaDto newDtoMedia) {
-		Media newMedia = new Media(newDtoMedia.getTitle(), newDtoMedia.getImdbRating(), newDtoMedia.getGenre(), Integer.valueOf(newDtoMedia.getYear())); 
+		Media newMedia = new Media(newDtoMedia.getTitle(), newDtoMedia.getImdbRating(), newDtoMedia.getGenre(), newDtoMedia.getYear()); 
 		mediaRepository.save(newMedia);
 		return newMedia;
 	}

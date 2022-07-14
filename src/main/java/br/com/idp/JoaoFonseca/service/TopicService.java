@@ -57,10 +57,11 @@ public class TopicService {
 		return topic;
 		}else {
 			MediaDto newDtoMedia = webClient.getMedia(title);
+			if(newDtoMedia == null) {
+				return null;			
+			}
 			Media newMedia = mediaService.register(newDtoMedia);
-			
 			Topic topic = form.convert(newMedia, authorRepository);
-			
 			topicRepository.save(topic);
 			return topic;
 		}

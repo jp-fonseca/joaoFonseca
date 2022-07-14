@@ -28,7 +28,7 @@ public class MediaDto {
 		this.title = media.getTitle();
 		this.imdbRating = media.getScore();
 		this.genre = media.getGenre();
-		this.year = media.getReleaseYear().toString();
+		this.year = media.getReleaseYear();
 	}
 	public String getTitle() {
 		return title;
@@ -51,8 +51,8 @@ public class MediaDto {
 	public String getYear() {
 		return year;
 	}
-	public void setYear(Integer date) {
-		this.year = String.valueOf(date);
+	public void setYear(String date) {
+		this.year = date;
 	}
 	
 	public static List<MediaDto> convert(List<Media> medias) {
