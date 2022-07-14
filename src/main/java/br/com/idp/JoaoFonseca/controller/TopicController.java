@@ -44,14 +44,14 @@ public class TopicController {
 		if(topic.isPresent()) {
 			return ResponseEntity.ok(new DetailedTopicDto(topic.get()));
 		}
-		return ResponseEntity.notFound().build();
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Topic not found.");
 	}
 	
 	@PostMapping
 	public ResponseEntity<TopicDto> registerTopic(@RequestBody @Valid TopicForm form, UriComponentsBuilder uriBuilder){
 		Topic topic = topicService.register(form);
 		if(topic == null) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Movie/TV show not Found.");
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Media not found at extern API.");
 		}
 		URI uri = uriBuilder.path("/topics/{id}").buildAndExpand(topic.getId()).toUri();
 		return ResponseEntity.created(uri).body(new TopicDto(topic));
