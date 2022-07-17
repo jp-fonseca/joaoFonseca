@@ -5,6 +5,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import br.com.idp.JoaoFonseca.dto.MediaDto;
@@ -17,11 +19,12 @@ public class MediaService {
 	@Autowired
 	private MediaRepository mediaRepository;
 
+	@Cacheable(value = "allMedias")
 	public List<MediaDto> listAll() {
 		List<Media> medias = mediaRepository.findAll();
 		return MediaDto.convert(medias);
 	}
-
+	
 	public Media findOne(String title) {
 		Media media = mediaRepository.findByTitle(title);
 		if (media == null) {
@@ -33,6 +36,7 @@ public class MediaService {
 	}
 	
 	@Transactional
+	@CacheEvict(value = "allMedias", allEntries = true)
 	public Media register(MediaDto newDtoMedia) {
 		Media newMedia = new Media(newDtoMedia.getTitle(), newDtoMedia.getImdbRating(), newDtoMedia.getGenre(), newDtoMedia.getYear()); 
 		mediaRepository.save(newMedia);

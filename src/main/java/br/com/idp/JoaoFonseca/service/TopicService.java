@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import br.com.idp.JoaoFonseca.dto.MediaDto;
@@ -34,6 +36,7 @@ public class TopicService {
 	private WebClientOmdbApi webClient;
 	
 
+	@Cacheable(value = "allTopics")
 	public List<TopicDto> listAll(String name) {
 		if (name == null) {
 			List<Topic> topics = topicRepository.findAll();
@@ -45,6 +48,7 @@ public class TopicService {
 	}
 
 	@Transactional
+	@CacheEvict(value = "allTopics", allEntries = true)
 	public Topic register(@Valid TopicForm form) {
 		
 		String title = form.getMediaName();
