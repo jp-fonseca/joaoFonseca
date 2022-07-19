@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,6 +56,17 @@ public class TopicController {
 		}
 		URI uri = uriBuilder.path("/topics/{id}").buildAndExpand(topic.getId()).toUri();
 		return ResponseEntity.created(uri).body(new TopicDto(topic));
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<TopicDto> closeTopic(@PathVariable Long id){
+		Optional<Topic> topic = topicService.detailOne(id);
+		if(topic.isPresent()) {
+			topicService.closeTopic(topic);
+			return ResponseEntity.ok(new TopicDto(topic.get()));
+		}else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Topic not found.");
+		}
 	}
 	
 }

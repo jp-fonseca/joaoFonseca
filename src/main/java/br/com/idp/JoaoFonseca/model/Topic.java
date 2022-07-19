@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +24,8 @@ public class Topic {
 	
 	private String description;
 	
-	private String status;
+	@Enumerated(EnumType.STRING)
+	private TopicStatus status = TopicStatus.NOT_REPLIED;
 	
 	@ManyToOne
 	@NotNull
@@ -39,11 +42,10 @@ public class Topic {
 	public Topic() {
 	}
 	
-	public Topic(Media media, String title, String description, String status, List<Reply> replies, Author author) {
+	public Topic(Media media, String title, String description, List<Reply> replies, Author author) {
 		this.media = media;
 		this.title = title;
 		this.description = description;
-		this.status = status;
 		this.replies = replies;
 		this.author = author;
 	}
@@ -64,11 +66,11 @@ public class Topic {
 		this.description = description;
 	}
 
-	public String getStatus() {
+	public TopicStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(TopicStatus status) {
 		this.status = status;
 	}
 

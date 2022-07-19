@@ -5,13 +5,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.idp.JoaoFonseca.model.Topic;
+import br.com.idp.JoaoFonseca.model.TopicStatus;
 
 public class TopicDto {
 
 	private Long id;
 	private String title;
 	private String mediaName;
-	private String status;
+	private TopicStatus status;
 	
 	public TopicDto (Topic topic) {
 	this.id = topic.getId();
@@ -32,7 +33,7 @@ public class TopicDto {
 		return mediaName;
 	}
 
-	public String getStatus() {
+	public TopicStatus getStatus() {
 		return status;
 	}
 

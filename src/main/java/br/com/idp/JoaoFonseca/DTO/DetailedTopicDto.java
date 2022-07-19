@@ -5,13 +5,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.idp.JoaoFonseca.model.Topic;
+import br.com.idp.JoaoFonseca.model.TopicStatus;
 
 public class DetailedTopicDto {
 
 	private Long id;
 	private String title;
 	private String description;
-	private String status;
+	private TopicStatus status;
 	private String mediaName;
 	private String authorName;
 	private List<ReplyDto> replies;
@@ -43,7 +44,7 @@ public class DetailedTopicDto {
 		return description;
 	}
 
-	public String getStatus() {
+	public TopicStatus getStatus() {
 		return status;
 	}
 

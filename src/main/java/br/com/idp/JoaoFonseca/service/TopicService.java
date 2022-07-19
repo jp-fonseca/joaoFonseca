@@ -16,6 +16,7 @@ import br.com.idp.JoaoFonseca.dto.TopicDto;
 import br.com.idp.JoaoFonseca.form.TopicForm;
 import br.com.idp.JoaoFonseca.model.Media;
 import br.com.idp.JoaoFonseca.model.Topic;
+import br.com.idp.JoaoFonseca.model.TopicStatus;
 import br.com.idp.JoaoFonseca.repository.AuthorRepository;
 import br.com.idp.JoaoFonseca.repository.TopicRepository;
 import br.com.idp.JoaoFonseca.service.adapter.WebClientOmdbApi;
@@ -75,6 +76,16 @@ public class TopicService {
 	public Optional<Topic> detailOne(Long id) {
 		Optional<Topic> topic = topicRepository.findById(id);
 		return topic;
+	}
+
+	@Transactional
+	public void changeStatus(Optional<Topic> topic) {
+		topic.get().setStatus(TopicStatus.REPLIED);		
+	}
+
+	@Transactional
+	public void closeTopic(Optional<Topic> topic) {
+		topic.get().setStatus(TopicStatus.CLOSED);
 	}
 
 }

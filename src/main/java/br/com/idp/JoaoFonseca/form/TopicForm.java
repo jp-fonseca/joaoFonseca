@@ -21,9 +21,6 @@ public class TopicForm {
 	private String description;
 	
 	@NotNull @NotEmpty
-	private String status;
-	
-	@NotNull @NotEmpty
 	private String mediaName;
 	
 	@NotNull @NotEmpty 
@@ -40,12 +37,6 @@ public class TopicForm {
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
 	}
 	
 	public String getAuthorId() {
@@ -68,7 +59,7 @@ public class TopicForm {
 		Optional<Author> author = authorRepository.findById(id);
 		if(author.isPresent()) {
 			Author presentAuthor = author.get();
-			return new Topic(media, title, description, status, new ArrayList<Reply>(), presentAuthor);
+			return new Topic(media, title, description, new ArrayList<Reply>(), presentAuthor);
 		}else {
 			throw new RuntimeException();
 		} 
