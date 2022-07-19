@@ -10,22 +10,45 @@ import javax.validation.constraints.NotNull;
 
 import br.com.idp.JoaoFonseca.dto.MediaDto;
 
+/**
+ * This is a class that represents a Media
+ */
 @Entity
 public class Media {
 
+	/**
+	 * The id of the media.
+	 */
 	@Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	/**
+	 * The title of the media.
+	 */
 	@NotNull
 	private String title;
 	
+	/**
+	 * The score (rating) of the Media at imdb.
+	 */
 	private Double score;
+	
+	/**
+	 * The release year of the media (or timelapse of it, e.g: tv shows).
+	 */
 	private String releaseYear;
+	
+	/**
+	 * The genre(s) of the media.
+	 */
 	private String genre;
 	
 	public Media() {
 	}
 	
+	/**
+	 * This is a way to set a Media given the specific Title, Score, Genre and ReleaseYear.
+	 */
 	public Media(String title, Double score, String genre, String releaseYear) {
 		this.title = title;
 		this.score = score;

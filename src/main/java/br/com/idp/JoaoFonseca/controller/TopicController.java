@@ -26,47 +26,72 @@ import br.com.idp.JoaoFonseca.form.TopicForm;
 import br.com.idp.JoaoFonseca.model.Topic;
 import br.com.idp.JoaoFonseca.service.TopicService;
 
+/**
+ * This is a class that represents a Controller (Topic).
+ */
 @RestController
 @RequestMapping("/topics")
 public class TopicController {
 
 	@Autowired
 	private TopicService topicService;
-	
+
+	/**
+	 * This method list All Topics.
+	 * @return ResponseEntity.ok(topics)
+	 */
 	@GetMapping
-	public ResponseEntity<List<TopicDto>> listAll(@RequestParam(required = false) String mediaName){
+	public ResponseEntity<List<TopicDto>> listAll(@RequestParam(required = false) String mediaName) {
 		List<TopicDto> topics = topicService.listAll(mediaName);
 		return ResponseEntity.ok(topics);
 	}
 	
+	/**
+	 * This method details a Topic by ID.
+	 * @param id The ID of the Topic
+	 * @return ResponseEntity.ok(topics) in case of success;
+	 * @throws ResponseStatusException(HttpStatus.NOT_FOUND)
+	 */
 	@GetMapping("/{id}")
-	public ResponseEntity<DetailedTopicDto> detailOneTopic(@PathVariable Long id){
+	public ResponseEntity<DetailedTopicDto> detailOneTopic(@PathVariable Long id) {
 		Optional<Topic> topic = topicService.detailOne(id);
-		if(topic.isPresent()) {
+		if (topic.isPresent()) {
 			return ResponseEntity.ok(new DetailedTopicDto(topic.get()));
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Topic not found.");
 	}
 	
+	/**
+	 * This method register a new Topic.
+	 * @param form TopicForm with Data to be validated.
+	 * @return ResponseEntity.created(uri).body(TopicDTO) in case of success;
+	 * @throws ResponseStatusException(HttpStatus.BAD_REQUEST)
+	 */
 	@PostMapping
-	public ResponseEntity<TopicDto> registerTopic(@RequestBody @Valid TopicForm form, UriComponentsBuilder uriBuilder){
+	public ResponseEntity<TopicDto> registerTopic(@RequestBody @Valid TopicForm form, UriComponentsBuilder uriBuilder) {
 		Topic topic = topicService.register(form);
-		if(topic == null) {
+		if (topic == null) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Media not found at extern API.");
 		}
 		URI uri = uriBuilder.path("/topics/{id}").buildAndExpand(topic.getId()).toUri();
 		return ResponseEntity.created(uri).body(new TopicDto(topic));
 	}
-	
+
+	/**
+	 * This method closes a Topic by ID.
+	 * @param id The ID of the Topic
+	 * @return ResponseEntity.ok(topic) in case of success;
+	 * @throws ResponseStatusException(HttpStatus.NOT_FOUND)
+	 */
 	@PutMapping("/{id}")
-	public ResponseEntity<TopicDto> closeTopic(@PathVariable Long id){
+	public ResponseEntity<TopicDto> closeTopic(@PathVariable Long id) {
 		Optional<Topic> topic = topicService.detailOne(id);
-		if(topic.isPresent()) {
+		if (topic.isPresent()) {
 			topicService.closeTopic(topic);
 			return ResponseEntity.ok(new TopicDto(topic.get()));
-		}else {
+		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Topic not found.");
 		}
 	}
-	
+
 }

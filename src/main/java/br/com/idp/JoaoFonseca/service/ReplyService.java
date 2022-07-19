@@ -17,6 +17,9 @@ import br.com.idp.JoaoFonseca.repository.AuthorRepository;
 import br.com.idp.JoaoFonseca.repository.ReplyRepository;
 import br.com.idp.JoaoFonseca.repository.TopicRepository;
 
+/**
+ * This class is responsible for all the services related to Replies.
+ */
 @Service
 public class ReplyService {
 
@@ -31,7 +34,13 @@ public class ReplyService {
 
 	@Autowired
 	private TopicService topicService;
-
+	
+	/**
+	 * This method register a Reply.
+	 * It validates if the Topic exists at Local Database or is CLOSED before registering.
+	 * @param form ReplyForm to be validated.
+	 * @return Reply created or null in case of not success.
+	 */
 	@Transactional
 	public Reply register(Long id, ReplyForm form) {
 		Optional<Topic> topic = topicRepository.findById(id);

@@ -7,22 +7,42 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * This is a class that represents an Author of the Topic/Reply.
+ * 
+ */
+
 @Entity
 public class Author {
 
+	/**
+	 * The id of the author.
+	 */
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	/**
+	 * The name of the author.
+	 */
 	private String name;
 	
+	/**
+	 * The email of the author.
+	 */
 	private String email;
 	
+	/**
+	 * The password of the author.
+	 */
 	private String password;
 	
 	
 	public Author () {
 	}
 	
+	/**
+	 * This is constructor of author with the given Name, Email and Password.
+	 */
 	public Author(String name, String email, String password) {
 		this.name = name;
 		this.email = email;

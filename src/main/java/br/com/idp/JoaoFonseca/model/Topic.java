@@ -14,27 +14,51 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+/**
+ * This is a class that represents a Topic.
+ */
 @Entity
 public class Topic {
 
+	/**
+	 * The id of the Topic.
+	 */
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	/**
+	 * The title of the Topic.
+	 */
 	private String title;
-	
+
+	/**
+	 * The description of the Topic.
+	 */
 	private String description;
 	
+	/**
+	 * The status of the Topic.
+	 */
 	@Enumerated(EnumType.STRING)
 	private TopicStatus status = TopicStatus.NOT_REPLIED;
 	
+	/**
+	 * The Media associated with the Topic.
+	 */
 	@ManyToOne
 	@NotNull
 	private Media media;
 	
+	/**
+	 * The Author of the Topic.
+	 */
 	@ManyToOne
 	@NotNull
 	private Author author;
 	
+	/**
+	 * The Reply(replies) of the Topic.
+	 */
 	@OneToMany(mappedBy = "topic")
 	private List<Reply> replies = new ArrayList<>();
 
@@ -42,6 +66,9 @@ public class Topic {
 	public Topic() {
 	}
 	
+	/**
+	 * This is a constructor to set a Topic with the given Media, Title, Description, Reply(replies) and Author.
+	 */
 	public Topic(Media media, String title, String description, List<Reply> replies, Author author) {
 		this.media = media;
 		this.title = title;

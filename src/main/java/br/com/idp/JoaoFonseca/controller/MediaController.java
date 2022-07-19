@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.idp.JoaoFonseca.dto.MediaDto;
 import br.com.idp.JoaoFonseca.service.MediaService;
 
+/**
+ * This is a class that represents a Controller(Media).
+ */
 @RestController
 @RequestMapping("/medias")
 public class MediaController {
@@ -18,6 +21,10 @@ public class MediaController {
 	@Autowired
 	public MediaService mediaService;
 	
+	/**
+	 * This method list All Medias.
+	 * @return ResponseEntity.ok(medias)
+	 */
 	@GetMapping
 	public ResponseEntity<List<MediaDto>> listAll(){
 		List<MediaDto> medias = mediaService.listAll();

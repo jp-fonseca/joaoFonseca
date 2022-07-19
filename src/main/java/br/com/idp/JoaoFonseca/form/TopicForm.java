@@ -12,17 +12,36 @@ import br.com.idp.JoaoFonseca.model.Reply;
 import br.com.idp.JoaoFonseca.model.Topic;
 import br.com.idp.JoaoFonseca.repository.AuthorRepository;
 
+/**
+ * This class represents a Form for the Topic.
+ */
 public class TopicForm {
-
+	
+	/**
+	 * The Title of The Topic. 
+	 * Can't be Null nor Empty.
+	 */
 	@NotNull @NotEmpty
 	private String title;
 	
+	/**
+	 * The Description of The Topic. 
+	 * Can't be Null nor Empty.
+	 */
 	@NotNull @NotEmpty
 	private String description;
 	
+	/**
+	 * The Name of the Media in The Topic. 
+	 * Can't be Null nor Empty.
+	 */
 	@NotNull @NotEmpty
 	private String mediaName;
 	
+	/**
+	 * The AuthorId of The Topic. 
+	 * Can't be Null nor Empty.
+	 */
 	@NotNull @NotEmpty 
 	private String authorId;
 	

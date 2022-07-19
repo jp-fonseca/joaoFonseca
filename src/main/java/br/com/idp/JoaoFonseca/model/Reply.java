@@ -2,6 +2,7 @@ package br.com.idp.JoaoFonseca.model;
 
 import java.util.Objects;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,18 +10,34 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+/**
+ * This is a class that represents a reply.
+ */
 @Entity
 public class Reply {
 	
+	/**
+	 * The id of the reply.
+	 */
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	/**
+	 * The text of the reply.
+	 */
 	private String description;
 	
+	
+	/**
+	 * The author associated with the reply.
+	 */
 	@ManyToOne
 	@NotNull
 	private Author author;
 	
+	/**
+	 * The topic wich the reply is in.
+	 */
 	@ManyToOne
 	@NotNull
 	private Topic topic;
@@ -28,6 +45,9 @@ public class Reply {
 	public Reply() {
 	}
 	
+	/**
+	 * This is a constructor of to set a reply with the given Topic, Description and Author.
+	 */
 	public Reply(Topic topic,String description, Author author) {
 		this.topic = topic;
 		this.description = description;

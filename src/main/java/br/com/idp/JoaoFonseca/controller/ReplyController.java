@@ -20,6 +20,9 @@ import br.com.idp.JoaoFonseca.form.ReplyForm;
 import br.com.idp.JoaoFonseca.model.Reply;
 import br.com.idp.JoaoFonseca.service.ReplyService;
 
+/**
+ * This is a class that represents a Controller(Reply).
+ */
 @RestController
 @RequestMapping("/topics")
 public class ReplyController {
@@ -27,6 +30,12 @@ public class ReplyController {
 	@Autowired
 	private ReplyService replyService;
 	
+	/**
+	 * This method register a new Reply.
+	 * @param form ReplyForm with Data to be validated.
+	 * @return ResponseEntity.created(uri).body(ReplyDTO) in case of success;
+	 * @throws ResponseStatusException(HttpStatus.NOT_FOUND)
+	 */
 	@PostMapping("/{id}")
 	public ResponseEntity<ReplyDto> registerReply(@PathVariable Long id, @RequestBody @Valid ReplyForm form, UriComponentsBuilder uriBuilder){
 		Reply reply = replyService.register(id, form);

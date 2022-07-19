@@ -7,6 +7,10 @@ import java.util.stream.Collectors;
 import br.com.idp.JoaoFonseca.model.Topic;
 import br.com.idp.JoaoFonseca.model.TopicStatus;
 
+
+/**
+ * This is a class that represents a Topic.
+ */
 public class TopicDto {
 
 	private Long id;

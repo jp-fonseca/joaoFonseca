@@ -10,11 +10,22 @@ import br.com.idp.JoaoFonseca.model.Reply;
 import br.com.idp.JoaoFonseca.model.Topic;
 import br.com.idp.JoaoFonseca.repository.AuthorRepository;
 
+/**
+ * This class represents a Form for the Reply.
+ */
 public class ReplyForm {
 	
+	/**
+	 * The Description of The Reply. 
+	 * Can't be Null nor Empty.
+	 */
 	@NotNull @NotEmpty
 	private String description;
 	
+	/**
+	 * The AuthorID of Reply. 
+	 * Can't be Null nor Empty.
+	 */
 	@NotNull @NotEmpty
 	private String authorId;
 	
