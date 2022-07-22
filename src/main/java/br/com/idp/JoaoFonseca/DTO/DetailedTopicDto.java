@@ -17,7 +17,9 @@ public class DetailedTopicDto {
 	private String authorName;
 	private List<ReplyDto> replies;
 	
+	public DetailedTopicDto() {
 	
+	}
 
 	public DetailedTopicDto(Topic topic) {
 	this.id = topic.getId();

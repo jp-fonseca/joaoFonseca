@@ -18,6 +18,9 @@ public class TopicDto {
 	private String mediaName;
 	private TopicStatus status;
 	
+	public TopicDto() {
+		
+	}
 	public TopicDto (Topic topic) {
 	this.id = topic.getId();
 	this.title = topic.getTitle();
