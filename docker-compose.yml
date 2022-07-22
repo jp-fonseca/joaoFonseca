@@ -1,0 +1,38 @@
+version: "3.9"
+services:
+
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    ports:
+      - 3306:3306
+      - 33060:33060
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=mediadb
+    networks:
+      - joaofonseca-network
+    volumes:
+      - /var/lib/mysql
+
+
+  quotationmanagement:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
+    image: jp-fonseca/forumedia
+    container_name: forumedia
+    ports:
+      - 8080:8080
+    environment:      
+      - PORT=8080
+      - STOCK_MANAGER_CONTAINER=stockmanager
+    networks:
+      - joaofonseca-network
+    depends_on:
+      - mysql
+      
+  
+networks:
+  joaofonseca-network:
+    driver: bridge
