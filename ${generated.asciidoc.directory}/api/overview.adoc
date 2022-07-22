@@ -1,0 +1,11 @@
+= ForuMedia
+
+== Overview
+Project for REST API documentation
+
+=== Version information
+Version: v1
+
+=== URI scheme
+BasePath: http://localhost:8080/
+
