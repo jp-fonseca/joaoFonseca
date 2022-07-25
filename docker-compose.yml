@@ -26,7 +26,7 @@ services:
       - 8080:8080
     environment:      
       - PORT=8080
-      - STOCK_MANAGER_CONTAINER=stockmanager
+      - OMBD_API_URL=ttp://www.omdbapi.com/
     networks:
       - joaofonseca-network
     depends_on:
