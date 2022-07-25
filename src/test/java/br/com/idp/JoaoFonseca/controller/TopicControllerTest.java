@@ -134,5 +134,41 @@ class TopicControllerTest {
 		.isNotFound();
 	}
 	
+	@Test
+	void givenValidTopicId_whenDeleteTopic_mustReturnNoContent() {
+
+		webTestClient.delete()
+		.uri("/topics/4")
+		.exchange()
+		.expectStatus()
+		.isNoContent();
+	}
+	
+	@Test
+	void givenInexistentTopicId_whenDeleteTopic_mustReturnNotFound() {
+		webTestClient.delete()
+		.uri("/topics/5")
+		.exchange()
+		.expectStatus()
+		.isNotFound();
+	}
+	
+	@Test
+	void givenRepliedTopicId_whenDeleteTopic_mustReturnBadRequest() {
+		webTestClient.delete()
+		.uri("/topics/2")
+		.exchange()
+		.expectStatus()
+		.isBadRequest();
+	}
+	
+	@Test
+	void givenClosedTopicId_whenDeleteTopic_mustReturnBadRequest() {
+		webTestClient.delete()
+		.uri("/topics/3")
+		.exchange()
+		.expectStatus()
+		.isBadRequest();
+	}
 	
 }

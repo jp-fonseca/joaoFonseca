@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.web.server.ResponseStatusException;
 
 import br.com.idp.JoaoFonseca.dto.TopicDto;
 import br.com.idp.JoaoFonseca.form.TopicForm;
@@ -32,7 +33,7 @@ class TopicServiceTest {
 	@Test
 	void givenNoMediaName_whenListAllMethodInvoqued_thenOneListWithAllMediasIsReturned() {
 		List<TopicDto> list = topicService.listAll(null);
-		assertEquals(list.size(), 4); //4 is the number of Topics existent in H2 DB.
+		assertEquals(list.size(), 3); //3 is the number of Topics existent in H2 DB.
 	}
 	
 	@Test
@@ -112,6 +113,34 @@ class TopicServiceTest {
 			topicService.changeStatus(topic);
 		});
 	}
+	
+	@Test
+	void givenAValidTopic_whenDeleteTopicMethodInvoqued_thenMustDeleteTopic() {
+		Long id = (long) 4;
+		Optional<Topic> topic = topicRepository.findById(id);
+		topicService.deleteTopic(topic);
+		Optional<Topic> isThereATopic = topicRepository.findById(id);
+		assertEquals(isThereATopic.isEmpty(), true);
+	}
+	
+	@Test
+	void givenAnRepliedTopic_whenDeleteTopicMethodInvoqued_thenMustThowBadRequest() {
+		Long id = (long) 2; //The status of this topic is REPLIED.
+		Optional<Topic> topic = topicRepository.findById(id);
+		assertThrows(ResponseStatusException.class, () -> {
+			topicService.deleteTopic(topic);			
+		});
+	}
+	@Test
+	void givenAClosedTopic_whenDeleteTopicMethodInvoqued_thenMustThowBadRequest() {
+		Long id = (long) 3; //The status of this topic is CLOSED.
+		Optional<Topic> topic = topicRepository.findById(id);
+		assertThrows(ResponseStatusException.class, () -> {
+			topicService.deleteTopic(topic);			
+		});
+	}
+	
+	
 	
 	
 }

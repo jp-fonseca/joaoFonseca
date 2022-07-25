@@ -9,7 +9,9 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import br.com.idp.JoaoFonseca.dto.MediaDto;
 import br.com.idp.JoaoFonseca.dto.TopicDto;
@@ -109,6 +111,17 @@ public class TopicService {
 	@Transactional
 	public void closeTopic(Optional<Topic> topic) {
 		topic.get().setStatus(TopicStatus.CLOSED);
+	}
+
+	@Transactional
+	@CacheEvict(value = "allTopics", allEntries = true)
+	public void deleteTopic(Optional<Topic> topic) {
+		if(topic.get().getStatus() == TopicStatus.NOT_REPLIED) {
+			topicRepository.deleteById(topic.get().getId());
+		}
+		else {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Topic is closed or already have been replyed.");
+		}
 	}
 
 }
